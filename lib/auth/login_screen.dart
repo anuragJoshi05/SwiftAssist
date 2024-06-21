@@ -31,171 +31,110 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text(
           "SwiftAssist",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.yellowAccent,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          child: Column(
-            children: [
-              const Text(
-                "Login",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 50),
-              CustomTextField(
-                hint: "Enter Email",
-                label: "Email",
-                controller: _email,
-                hintStyle: const TextStyle(color: Colors.white70),
-                labelStyle: const TextStyle(color: Colors.white),
-                textStyle: const TextStyle(color: Colors.white),
-                borderRadius: 20.0,
-                borderColor: Colors.white30,
-                backgroundColor: Colors.white12,
-              ),
-              const SizedBox(height: 20),
-              CustomTextField(
-                hint: "Enter Password",
-                label: "Password",
-                controller: _password,
-                isPassword: true,
-                hintStyle: const TextStyle(color: Colors.white70),
-                labelStyle: const TextStyle(color: Colors.white),
-                textStyle: const TextStyle(color: Colors.white),
-                borderRadius: 20.0,
-                borderColor: Colors.white30,
-                backgroundColor: Colors.white12,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ForgotPassword()),
-                    );
-                  },
-                  child: const Text(
-                    "Forgot Password?",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
-                  shadowColor: Colors.blueAccent,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 15),
-                ),
-                onPressed: _login,
-                child: const Text(
-                  "Login with Email",
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              isLoading
-                  ? const CircularProgressIndicator()
-                  : ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  shadowColor: Colors.grey,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 15),
-                ),
-                icon: const Icon(Icons.login),
-                label: const Text(
-                  "Login with Google",
-                  style: TextStyle(fontSize: 16),
-                ),
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  await _auth.loginWithGoogle();
-                  setState(() {
-                    isLoading = false;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  foregroundColor: Colors.white,
-                  shadowColor: Colors.greenAccent,
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 40, vertical: 15),
-                ),
-                icon: const Icon(Icons.phone),
-                label: const Text(
-                  "Login with Phone",
-                  style: TextStyle(fontSize: 16),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PhoneLoginScreen()),
-                  );
-                },
-              ),
-              const SizedBox(height: 5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't have an account? ",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  InkWell(
-                    onTap: () => goToSignup(context),
-                    child: const Text(
-                      "Signup",
-                      style: TextStyle(color: Colors.red),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Column(
+          children: [
+            const Spacer(),
+            Flexible(
+              flex: 8,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const Text("Login",
+                        style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500)),
+                    const SizedBox(height: 50),
+                    CustomTextField(
+                      hint: "Enter Email",
+                      label: "Email",
+                      controller: _email,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 20),
+                    CustomTextField(
+                      hint: "Enter Password",
+                      label: "Password",
+                      controller: _password,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ForgotPassword()));
+                          },
+                          child: const Text(
+                            "Forgot Password?",
+                            style: TextStyle(color: Colors.blueAccent),
+                          )),
+                    ),
+                    const SizedBox(height: 30),
+                    SignInButton(
+                      Buttons.email,
+                      text: "Login with Email",
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      onPressed: _login,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    isLoading
+                        ? const CircularProgressIndicator()
+                        : SignInButton(
+                      Buttons.google,
+                      text: "Login with Google",
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      onPressed: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        await _auth.loginWithGoogle();
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    SignInButton(Buttons.anonymous,
+                        text: "Login with Phone",
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ), onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => PhoneLoginScreen()));
+                        }),
+                    const SizedBox(height: 5),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      const Text("Already have an account? "),
+                      InkWell(
+                        onTap: () => goToSignup(context),
+                        child:
+                        const Text("Signup", style: TextStyle(color: Colors.red)),
+                      )
+                    ]),
+                  ],
+                ),
               ),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ),
+            const Spacer()
+          ],
         ),
       ),
     );

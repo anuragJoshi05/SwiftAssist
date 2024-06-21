@@ -23,14 +23,12 @@ class _OTPScreenState extends State<OTPScreen> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text(
-          "SwiftAssist",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          'SwiftAssist 🚀',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
         centerTitle: true,
-        backgroundColor: Colors.black87,
       ),
       body: SingleChildScrollView(
         child: Padding(

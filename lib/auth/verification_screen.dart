@@ -46,7 +46,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          'SwiftAssist 🚀',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+      ),
       body: Align(
         alignment: Alignment.center,
         child: Padding(

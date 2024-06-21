@@ -1,4 +1,4 @@
-  import 'package:auth_firebase/auth/auth_service.dart';
+import 'package:auth_firebase/auth/auth_service.dart';
 import 'package:auth_firebase/auth/login_screen.dart';
 import 'package:auth_firebase/home_screen.dart';
 import 'package:auth_firebase/widgets/button.dart';
@@ -79,17 +79,17 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   goToLogin(BuildContext context) => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
+    context,
+    MaterialPageRoute(builder: (context) => const LoginScreen()),
+  );
 
   goToHome(BuildContext context) => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
+    context,
+    MaterialPageRoute(builder: (context) => const HomeScreen()),
+  );
 
   _signup() async {
-        await _auth.createUserWithEmailAndPassword(_email.text, _password.text);
-        Navigator.pop(context);
+    await _auth.createUserWithEmailAndPassword(_email.text, _password.text);
+    Navigator.pop(context);
   }
 }
